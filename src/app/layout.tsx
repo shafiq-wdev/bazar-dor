@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
 import { Hind_Siliguri } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+// import { Toaster } from "sonner";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["bengali", "latin"],
@@ -22,10 +25,14 @@ export default function RootLayout({
   return (
     <html
       lang="bn"
+      data-theme="light"
       className={`${hindSiliguri.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        {children}
+      <body className="min-h-full flex flex-col bg-gray-100">
+        <Navbar />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
+        {/* <Toaster position="top-center" /> */}
       </body>
     </html>
   );
