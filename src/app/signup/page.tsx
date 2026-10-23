@@ -163,7 +163,7 @@ const SignUpPage = () => {
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <Button
             type="button"
-            variant="bordered"
+            variant="outline"
             isDisabled={isLoading}
             onPress={() => handleSocialSignIn("google")}
             className="w-full border-gray-200 text-gray-800"
@@ -174,7 +174,7 @@ const SignUpPage = () => {
 
           <Button
             type="button"
-            variant="bordered"
+            variant="outline"
             isDisabled={isLoading}
             onPress={() => handleSocialSignIn("github")}
             className="w-full border-gray-200 text-gray-800"

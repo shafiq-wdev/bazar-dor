@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -13,30 +14,38 @@ import {
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const SignInPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
+type SocialProvider = "google" | "github";
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+const SignInPage = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const onSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
+
+    if (isLoading) return;
+
     setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
     const email = String(formData.get("email") ?? "");
     const password = String(formData.get("password") ?? "");
-    
-     try {
+
+    try {
       const { error } = await signIn.email({
         email,
         password,
       });
 
       if (error) {
-        toast.error(error.message || "অ্যাকাউন্ট সাইন ইন করা যায়নি।");
+        toast.error(
+          error.message || "অ্যাকাউন্ট সাইন ইন করা যায়নি।"
+        );
         return;
       }
 
       toast.success("অ্যাকাউন্ট সাইন ইন হয়েছে!");
-      
     } catch {
       toast.error("কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।");
     } finally {
@@ -44,7 +53,11 @@ const SignInPage = () => {
     }
   };
 
-  const handleSocialSignIn = async (provider: "google" | "github") => {
+  const handleSocialSignIn = async (
+    provider: SocialProvider
+  ): Promise<void> => {
+    if (isLoading) return;
+
     setIsLoading(true);
 
     try {
@@ -54,7 +67,9 @@ const SignInPage = () => {
       });
 
       if (error) {
-        toast.error(error.message || "সোশ্যাল সাইন ইন ব্যর্থ হয়েছে।");
+        toast.error(
+          error.message || "সোশ্যাল সাইন ইন ব্যর্থ হয়েছে।"
+        );
       }
     } catch {
       toast.error("সাইন ইন করা যায়নি। আবার চেষ্টা করুন।");
@@ -69,6 +84,7 @@ const SignInPage = () => {
         <h1 className="text-2xl font-extrabold text-gray-900">
           সাইন ইন
         </h1>
+
         <p className="mt-2 text-sm text-gray-500">
           বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
         </p>
@@ -95,7 +111,7 @@ const SignInPage = () => {
             <Input
               name="password"
               type="password"
-              placeholder="কমপক্ষে ৮ অক্ষর"
+              placeholder="পাসওয়ার্ড লিখুন"
               minLength={8}
               className="w-full"
             />
@@ -107,9 +123,7 @@ const SignInPage = () => {
             isDisabled={isLoading}
             className="w-full rounded-lg bg-green-700 text-white shadow-md hover:bg-green-800"
           >
-            {isLoading
-              ? "সাইন ইন হচ্ছে..."
-              : "সাইন ইন"}
+            {isLoading ? "সাইন ইন হচ্ছে..." : "সাইন ইন"}
           </Button>
         </Form>
 
@@ -122,7 +136,7 @@ const SignInPage = () => {
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <Button
             type="button"
-            variant="bordered"
+            variant="outline"
             isDisabled={isLoading}
             onPress={() => handleSocialSignIn("google")}
             className="w-full border-gray-200 text-gray-800"
@@ -133,7 +147,7 @@ const SignInPage = () => {
 
           <Button
             type="button"
-            variant="bordered"
+            variant="outline"
             isDisabled={isLoading}
             onPress={() => handleSocialSignIn("github")}
             className="w-full border-gray-200 text-gray-800"

@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Navlink from "@/components/Navlink";
+
 
 
 const hindSiliguri = Hind_Siliguri({
