@@ -1,19 +1,22 @@
+
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
-const client = new MongoClient(process.env.MONGODB_URL as string);
-const db = client.db("bazar-dor");
+const mongoUrl = process.env.BETTER_AUTH_DB_URL;
+
+if (!mongoUrl) {
+  throw new Error("BETTER_AUTH_DB_URL is missing from .env.local");
+}
+
+const client = new MongoClient(mongoUrl);
+const db = client.db("bazardor");
 
 export const auth = betterAuth({
     emailAndPassword: { 
     enabled: true, 
   }, 
-  socialProviders: {
-        google: { 
-            clientId: process.env.BETTER_AUTH_GOOGLE_CLIENT_ID as string, 
-            clientSecret: process.env.BETTER_AUTH_GOOGLE_SECRET as string, 
-        }, 
-    },
-  database: mongodbAdapter(db, {client}),
+  database: mongodbAdapter(db, {
+    client,
+  }),
 });

@@ -3,6 +3,7 @@ import Image from "next/image";
 import CurrentDate from "./CurrentDate";
 import NavLinks from "./NavLinks";
 import MarqueeBar from "./MarqueeBar";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -35,19 +36,19 @@ const Header = () => {
 
         {/* Right: Buttons */}
         <div className="flex shrink-0 items-center gap-1 sm:gap-2">
-          <button
+          <Link href={'/signin'} ><button
             type="button"
             className="btn btn-ghost btn-xs sm:btn-sm"
           >
             সাইন ইন
-          </button>
+          </button></Link>
 
-          <button
+          <Link href={'/signup'} ><button 
             type="button"
             className="btn btn-xs border-none bg-green-600 text-white hover:bg-orange-700 sm:btn-sm"
           >
             সাইন আপ
-          </button>
+          </button></Link>
         </div>
       </div>
 

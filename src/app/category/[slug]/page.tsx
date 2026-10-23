@@ -76,6 +76,7 @@ async function CategoryContent({ params }: CategoryPageProps) {
       <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-end gap-4 rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
         
         <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-500"></span>
           <span className="text-sm text-gray-500">সাজান</span>
           <select className="rounded-xl border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 outline-none focus:border-gray-400">
             <option value="default">ডিফল্ট</option>
@@ -91,7 +92,12 @@ async function CategoryContent({ params }: CategoryPageProps) {
           এই ক্যাটাগরিতে কোনো পণ্য পাওয়া যায়নি।
         </p>
       ) : (
+        <>
+        <p className="mb-5 text-sm text-gray-500">
+          মোট {filteredProducts.length}টি পণ্য দেখানো হচ্ছে
+        </p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    
           {filteredProducts.map((product) => {
             const isUp = product.change.dir === "up";
             const isEqual =
@@ -148,6 +154,7 @@ async function CategoryContent({ params }: CategoryPageProps) {
             );
           })}
         </div>
+        </>
       )}
     </section>
   );

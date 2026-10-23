@@ -5,7 +5,10 @@ import "./globals.css";
 import { Hind_Siliguri } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-// import { Toaster } from "sonner";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Navlink from "@/components/Navlink";
+
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["bengali", "latin"],
@@ -30,9 +33,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-gray-100">
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        
+        <main className="min-h-screen">
+          {children}
+        </main>
         <Footer />
-        {/* <Toaster position="top-center" /> */}
+        <ToastContainer position="top-right" autoClose={3000} />
       </body>
     </html>
   );
