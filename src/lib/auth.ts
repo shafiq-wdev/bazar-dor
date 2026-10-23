@@ -6,7 +6,7 @@ import { mongodbAdapter } from "@better-auth/mongo-adapter";
 const mongoUrl = process.env.BETTER_AUTH_DB_URL;
 
 if (!mongoUrl) {
-  throw new Error("BETTER_AUTH_DB_URL is missing from .env.local");
+  throw new Error("BETTER_AUTH_DB_URL is missing");
 }
 
 const client = new MongoClient(mongoUrl);
