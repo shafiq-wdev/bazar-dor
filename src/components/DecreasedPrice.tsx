@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 interface Product {
@@ -41,6 +42,11 @@ const DecreasedPrice = async () => {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {increasedProducts.map((product) => (
+          <Link
+            href={`/product/${product.id}`}
+            key={product.id}
+            className="block"
+          >
           <div
             key={product.id}
             className="flex flex-col justify-between rounded-2xl bg-white p-5 shadow-sm border border-gray-100"
@@ -76,6 +82,7 @@ const DecreasedPrice = async () => {
               </div>
             </div>
           </div>
+          </Link>
         ))}
       </div>
     </section>

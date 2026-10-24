@@ -104,6 +104,7 @@ async function CategoryContent({ params }: CategoryPageProps) {
               product.change.dir === "equal" || product.change.pct === 0;
 
             return (
+              
               <div
                 key={product.id}
                 className="flex flex-col justify-between rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
